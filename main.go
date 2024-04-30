@@ -34,8 +34,19 @@ func (b *bucket) insert(k string){
 	newNode := &bucketNode{key: k}
 	newNode.next = b.head
 	b.head = newNode
-
 }
+
+func (b *bucket) search(k string) bool{
+	currentNode := b.head
+	for currentNode != nil {
+		if currentNode.key == k {
+			return true
+		}
+		currentNode = currentNode.next
+	}
+	return false
+}
+
 
 func hash(key string) int{
 	sum := 0
@@ -59,5 +70,7 @@ func main(){
 
 	testBucket := &bucket{}
 	testBucket.insert("RANDY")
+	fmt.Println(testBucket.search("RANDY"))
+	fmt.Println(testBucket.search("ERIC"))
 }
 
