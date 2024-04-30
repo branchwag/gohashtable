@@ -22,13 +22,15 @@ func (h *HashTable) Insert(key string){
 	h.array[index].insert(key)
 }
 
-// func (h *HashTable) Search(key string) bool {
-// 	index :=hash(key)
-// }
+func (h *HashTable) Search(key string) bool {
+	index :=hash(key)
+	return h.array[index].search(key)
+}
 
-// func (h *HashTable) Delete(key string) {
-// 	index :=hash(key)
-// }
+func (h *HashTable) Delete(key string) {
+	index :=hash(key)
+	h.array[index].delete(key)
+}
 
 func (b *bucket) insert(k string){
 	if !b.search(k){
@@ -63,6 +65,7 @@ func (b *bucket) delete(k string){
 	for previousNode.next != nil {
 		if previousNode.next.key == k {
 			previousNode.next = previousNode.next.next
+			return
 		}
 		previousNode = previousNode.next
 	}
