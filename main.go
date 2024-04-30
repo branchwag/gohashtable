@@ -17,6 +17,34 @@ type bucketNode struct {
 	next *bucketNode
 }
 
+func (h *HashTable) Insert(key string){
+	index :=hash(key)
+	h.array[index].insert(key)
+}
+
+// func (h *HashTable) Search(key string) bool {
+// 	index :=hash(key)
+// }
+
+// func (h *HashTable) Delete(key string) {
+// 	index :=hash(key)
+// }
+
+func (b *bucket) insert(k string){
+	newNode := &bucketNode{key: k}
+	newNode.next = b.head
+	b.head = newNode
+
+}
+
+func hash(key string) int{
+	sum := 0
+	for _,v := range key {
+		sum+=int(v)
+	}
+	return sum & ArraySize
+}
+
 func Init() *HashTable{
 	result := &HashTable{}
 	for i := range result.array{
@@ -28,5 +56,8 @@ func Init() *HashTable{
 func main(){
 	testHashTable := Init()
 	fmt.Println(testHashTable)
+
+	testBucket := &bucket{}
+	testBucket.insert("RANDY")
 }
 
