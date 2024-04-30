@@ -31,9 +31,14 @@ func (h *HashTable) Insert(key string){
 // }
 
 func (b *bucket) insert(k string){
+	if !b.search(k){
 	newNode := &bucketNode{key: k}
 	newNode.next = b.head
 	b.head = newNode
+	} else {
+	fmt.Println(k, "already exists")
+	}
+
 }
 
 func (b *bucket) search(k string) bool{
@@ -69,6 +74,7 @@ func main(){
 	fmt.Println(testHashTable)
 
 	testBucket := &bucket{}
+	testBucket.insert("RANDY")
 	testBucket.insert("RANDY")
 	fmt.Println(testBucket.search("RANDY"))
 	fmt.Println(testBucket.search("ERIC"))
