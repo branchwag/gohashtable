@@ -52,6 +52,22 @@ func (b *bucket) search(k string) bool{
 	return false
 }
 
+func (b *bucket) delete(k string){
+
+	if b.head.key == k {
+		b.head = b.head.next
+		return
+	}
+
+	previousNode := b.head
+	for previousNode.next != nil {
+		if previousNode.next.key == k {
+			previousNode.next = previousNode.next.next
+		}
+		previousNode = previousNode.next
+	}
+}
+
 
 func hash(key string) int{
 	sum := 0
@@ -75,7 +91,7 @@ func main(){
 
 	testBucket := &bucket{}
 	testBucket.insert("RANDY")
-	testBucket.insert("RANDY")
+	testBucket.delete("RANDY")
 	fmt.Println(testBucket.search("RANDY"))
 	fmt.Println(testBucket.search("ERIC"))
 }
